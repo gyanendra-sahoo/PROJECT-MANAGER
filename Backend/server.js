@@ -8,14 +8,14 @@ const authRoutes = require("./routes/authRoutes.js");
 
 const app = express();
 const corsOptions = {
-        origin: process.env.CLIENT_URL || "*",
-        methods: ["GET,HEAD,PUT,PATCH,POST,DELETE"],
-        allowedHeaders: ["Content-Type", "Authorization"],
+  origin: process.env.CLIENT_URL || "*",
+  methods: ["GET,HEAD,PUT,PATCH,POST,DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
 
 // Middleware
 app.use(express.json());
-app.use(cors(corsOptions()));
+app.use(cors(corsOptions));
 
 // Database Connection
 connectDB();
