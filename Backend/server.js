@@ -5,6 +5,7 @@ const path = require("path");
 const cors = require("cors");
 
 const authRoutes = require("./routes/authRoutes.js");
+const userRoutes = require("./routes/userRoutes.js");
 
 const app = express();
 const corsOptions = {
@@ -22,7 +23,7 @@ connectDB();
 
 // Routes
 app.use("/api/auth", authRoutes);
-// app.use("/api/users", userRoutes);
+app.use("/api/users", userRoutes);
 // app.use("/api/task", taskRoutes);
 // app.use("/api/reports", reportRoutes);
 
