@@ -39,7 +39,6 @@ const registerUser = async (req, res) => {
       role,
       profileImageUrl,
     });
-
     res.status(201).json({
       _id: user._id,
       name: user.name,

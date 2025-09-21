@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
         email: { type: String, required: true, unique: true },
         password: { type: String, required: true },
         profileImageUrl: { type: String, default: "" },
-        role: { type: String, enum: ['member', 'admin'], default: 'user' },
+        role: { type: String, enum: ['member', 'admin'], default: 'member' },
 }, { timestamps: true });
 
 module.exports = mongoose.model("User", userSchema);
