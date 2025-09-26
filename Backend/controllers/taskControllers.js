@@ -83,14 +83,15 @@ const getTaskById = async (req, res) => {
 };
 
 const createTask = async (req, res) => {
+
   try {
     const {
-      tittle,
+      title,
       description,
       priority,
       dueDate,
       assignedTo,
-      atachments,
+      attachments,
       todoChecklist,
     } = req.body;
 
@@ -100,14 +101,20 @@ const createTask = async (req, res) => {
         .json({ message: "assignedTo must be an array of user IDs" });
     }
 
+    const formattedTodoChecklist = todoChecklist?.map(item => ({
+      todo: item.text,
+      completed: item.completed
+    }));
+
     const task = await Task.create({
-      tittle,
+      title,
       description,
       priority,
       dueDate,
       assignedTo,
-      atachments,
-      todoChecklist,
+      attachments,
+      todoChecklist: formattedTodoChecklist,
+      createdBy: req.user._id,
     });
 
     res.status(201).json({ message: "Task created successfully", task });
@@ -265,7 +272,7 @@ const getDashboardData = async (req, res) => {
     const recentTasks = await Task.find()
       .sort({ createdAt: -1 })
       .limit(10)
-      .select("tittle status priority dueDate createdAt");
+      .select("title status priority dueDate createdAt");
     res.json({
       statistics: {
         totalTasks,

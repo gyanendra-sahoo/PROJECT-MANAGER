@@ -14,11 +14,11 @@ import {
 const CustomBarChart = ({ data }) => {
   const getBarColor = (entry) => {
     switch (entry.priority) {
-      case "Low":
+      case "low":
         return "#00BC7D";
-      case "Medium":
+      case "medium":
         return "#FE9900";
-      case "High":
+      case "high":
         return "#FF1F57";
       default:
         return "#00BC7D";

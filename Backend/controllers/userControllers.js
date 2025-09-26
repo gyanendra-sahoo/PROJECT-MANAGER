@@ -20,7 +20,7 @@ const getUsers = async (req, res) => {
           status: "completed",
         });
         return {
-          ...user._docs,
+          ...user._doc,
           pendingTasks,
           inProgressTasks,
           completedTasks,
