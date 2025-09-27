@@ -2,10 +2,12 @@ const Task = require("../models/Task");
 
 const getTasks = async (req, res) => {
   try {
-    const { status } = req.query;
+    let { status } = req.query;
+    status = status?.toLowerCase();
     let filter = {};
-    if (status) filter.status = status;
-
+    if (status && status !== "all") {
+      filter.status = status;
+    }
     let baseQuery =
       req.user.role === "admin"
         ? filter
@@ -21,17 +23,19 @@ const getTasks = async (req, res) => {
       completedTodoCount: task.todoChecklist.filter((t) => t.completed).length,
     }));
 
-    const allTasks = await Task.countDocuments(baseQuery);
+    const allTasks = await Task.countDocuments(
+      req.user.role === "admin" ? {} : { assignedTo: req.user._id }
+    );
     const pendingTasks = await Task.countDocuments({
-      ...baseQuery,
+      ...(req.user.role === "admin" ? {} : { assignedTo: req.user._id }),
       status: "pending",
     });
     const inProgressTasks = await Task.countDocuments({
-      ...baseQuery,
+      ...(req.user.role === "admin" ? {} : { assignedTo: req.user._id }),
       status: "in-progress",
     });
     const completedTasks = await Task.countDocuments({
-      ...baseQuery,
+      ...(req.user.role === "admin" ? {} : { assignedTo: req.user._id }),
       status: "completed",
     });
 
@@ -320,7 +324,7 @@ const getUserDashboardData = async (req, res) => {
     const recentTasks = await Task.find({ assignedTo: userId })
       .sort({ createdAt: -1 })
       .limit(10)
-      .select("tittle status priority dueDate createdAt");
+      .select("title status priority dueDate createdAt");
     res.json({
       statistics: {
         totalTasks,

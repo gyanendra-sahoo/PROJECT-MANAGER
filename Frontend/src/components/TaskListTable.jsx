@@ -2,6 +2,7 @@ import React from "react";
 import moment from "moment";
 
 const TaskListTable = ({ tableData }) => {
+  console.log(tableData);
   const getStatusBadgeColor = (status) => {
     switch (status.toLowerCase()) {
       case "completed":
@@ -16,17 +17,17 @@ const TaskListTable = ({ tableData }) => {
   };
 
   const getPriorityBadgeColor = (priority) => {
-  switch (priority.toLowerCase()) {
-    case "high":
-      return "bg-red-100 text-red-500 border border-red-200";
-    case "medium":
-      return "bg-orange-100 text-orange-500 border border-orange-200";
-    case "low":
-      return "bg-green-100 text-green-500 border border-green-500";
-    default:
-      return "bg-gray-100 text-gray-500 border border-gray-200";
-  }
-};
+    switch (priority.toLowerCase()) {
+      case "high":
+        return "bg-red-100 text-red-500 border border-red-200";
+      case "medium":
+        return "bg-orange-100 text-orange-500 border border-orange-200";
+      case "low":
+        return "bg-green-100 text-green-500 border border-green-500";
+      default:
+        return "bg-gray-100 text-gray-500 border border-gray-200";
+    }
+  };
   return (
     <div className="overflow-x-auto p-0 rounded-lg mt-3">
       <table className="min-w-full">
