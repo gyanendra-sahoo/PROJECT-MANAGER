@@ -20,11 +20,11 @@ const ManageTasks = () => {
   const navigate = useNavigate();
 
   const statusMap = {
-  All: "",
-  Pending: "pending",
-  "In Progress": "in-progress",
-  Completed: "completed",
-};
+    All: "",
+    Pending: "pending",
+    "In Progress": "in-progress",
+    Completed: "completed",
+  };
 
   const getAllTasks = async (status) => {
     try {
@@ -65,7 +65,23 @@ const ManageTasks = () => {
   };
 
   const handleDownloadReport = async () => {
-    // Implement download logic
+    try {
+      const response = await axiosInstance.get(API_PATHS.REPORTS.EXPORT_TASKS, {
+        responseType: "blob",
+      });
+
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "user_details.xlsx");
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error downloading task details:", error.message);
+      toast.error("Failed to download task details. Please try again later.");
+    }
   };
 
   useEffect(() => {
