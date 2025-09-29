@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
 import { LuTarget, LuTrash2 } from "react-icons/lu";
-import SelectDropdown from "../../components/Input/SelectDropdown";
+import SelectDropdown from "../../components/Input/SelectDropdown.jsx";
 import SelectUsers from "../../components/Input/SelectUsers";
 import TodoListInput from "../../components/Input/TodoListInput";
 import AddAttachmentsInput from "../../components/Input/AddAttachmentsInput";
