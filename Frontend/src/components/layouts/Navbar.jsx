@@ -19,7 +19,10 @@ const Navbar = ({ activeMenu }) => {
           )
         }
       </button>
-      <h2 className='text-lg font-medium text-black'>TASK MANAGER</h2>
+      <div className='flex gap-1 items-center'>
+        <img src="/images/logo-1.png" className='w-12 h-10' alt="" />
+        <h2 className='text-lg font-medium text-black'><span className='text-[#1F4167] font-bold'>PRO</span><span>TASKER</span></h2>
+      </div>
       {
         openSideMenu && (
           <div className='fixed top-[61px] -ml-4 bg-white'>

@@ -55,6 +55,8 @@ const CreateTask = () => {
   const createTask = async () => {
     setLoading(true);
     try {
+      if (!taskData.priority) taskData.priority = "Low";
+
       const todolist = taskData.todoChecklist?.map((item) => ({
         todo: item,
         completed: false,
@@ -62,23 +64,26 @@ const CreateTask = () => {
 
       const payload = {
         ...taskData,
+        priority: taskData.priority.toLowerCase(),
         dueDate: new Date(taskData.dueDate).toISOString(),
         todoChecklist: todolist,
       };
 
-      console.log(payload);
+      console.log("Payload sent to backend:", payload);
 
-      const response = await axiosInstance.post(API_PATHS.TASKS.CREATE_TASK, {
-        ...taskData,
-        dueDate: new Date(taskData.dueDate).toISOString(),
-        todoChecklist: todolist,
-      });
+      const response = await axiosInstance.post(
+        API_PATHS.TASKS.CREATE_TASK,
+        payload
+      );
 
       toast.success("Task Created Successfully");
       clearData();
     } catch (error) {
-      console.error("Error Creating Task", error.message);
-      setLoading(false);
+      console.error(
+        "Error Creating Task:",
+        error.response?.data || error.message
+      );
+      toast.error("Error creating task. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -89,7 +94,9 @@ const CreateTask = () => {
     try {
       const todolist = taskData.todoChecklist?.map((item) => {
         const prevTodoChecklist = currentTask?.todoChecklist || [];
-        const matchedTask = prevTodoChecklist.find((task) => task.text == item);
+        const matchedTask = prevTodoChecklist.find(
+          (task) => task.text === item
+        );
 
         return {
           todo: item,
@@ -177,16 +184,18 @@ const CreateTask = () => {
 
   const deleteTask = async () => {
     try {
-      const response = await axiosInstance.delete(API_PATHS.TASKS.DELETE_TASK(taskId));
+      const response = await axiosInstance.delete(
+        API_PATHS.TASKS.DELETE_TASK(taskId)
+      );
 
       setOpenDeleteAlert(false);
       toast.success("Task details deleted successfully");
-      navigate('/admin/tasks')
+      navigate("/admin/tasks");
     } catch (error) {
       console.error(
         "Error deleting task:",
         error.response?.data.message || error.message
-      )
+      );
     }
   };
 
@@ -238,7 +247,7 @@ const CreateTask = () => {
                 placeholder="Describe task"
                 className="form-input"
                 rows={4}
-                value={taskData.description}
+                value={taskData.description || ""}
                 onChange={({ target }) =>
                   handleValueChange("description", target.value)
                 }
@@ -265,7 +274,7 @@ const CreateTask = () => {
                 <input
                   placeholder="Create App UI"
                   className="form-input"
-                  value={taskData.dueDate}
+                  value={taskData.dueDate || ""}
                   onChange={({ target }) =>
                     handleValueChange("dueDate", target.value)
                   }
@@ -329,13 +338,13 @@ const CreateTask = () => {
       </div>
 
       <Modal
-      isOpen={openDeleteAlert}
-      onClose={() => setOpenDeleteAlert(false)}
-      title="Delete Task"
+        isOpen={openDeleteAlert}
+        onClose={() => setOpenDeleteAlert(false)}
+        title="Delete Task"
       >
         <DeleteAlert
-        content="Are you sure you want to delete this task?"
-        onDelete={() => deleteTask()}
+          content="Are you sure you want to delete this task?"
+          onDelete={() => deleteTask()}
         />
       </Modal>
     </DashboardLayout>
