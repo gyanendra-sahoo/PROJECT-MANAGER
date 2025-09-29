@@ -55,9 +55,15 @@ cd project-manager
 ### Setup Environment Variables
 Create a ```.env``` file in your backend folder and add:
 ```
-PORT=5000
-MONGO_URI=mongodb://localhost:27017/project-manager
-JWT_SECRET=your_jwt_secret
+PORT=8000
+
+MONGO_URI= conntect the database uri
+
+JWT_SECRET= add the jwt secrete
+
+JWT_SECRET_EXPIRE= add the expire time
+
+ADMIN_INVITE_TOKEN= add your token
 ```
 ### Run the Application
 - Start backend server :
