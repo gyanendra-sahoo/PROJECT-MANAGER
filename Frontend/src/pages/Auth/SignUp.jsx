@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { validateEmail } from "../../utils/helper";
-import ProfilePhotoSelector from "../../components/Input/ProfileSelector";
+import ProfileSelector from "../../components/Input/ProfileSelector";
 import InputBox from "../../components/Input/InputBox";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
@@ -84,7 +84,7 @@ const SignUp = () => {
         </p>
 
         <form onSubmit={handleSignup}>
-          <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
+          <ProfileSelector image={profilePic} setImage={setProfilePic} />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InputBox
