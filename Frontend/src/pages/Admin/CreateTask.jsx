@@ -6,7 +6,7 @@ import { API_PATHS } from "../../utils/apiPaths";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
-import { LuTarget, LuTrash2 } from "react-icons/lu";
+import { LuTrash2 } from "react-icons/lu";
 import SelectDropdown from "../../components/Input/SelectDropdown.jsx";
 import SelectUsers from "../../components/Input/SelectUsers.jsx";
 import TodoListInput from "../../components/Input/TodoListInput.jsx";
