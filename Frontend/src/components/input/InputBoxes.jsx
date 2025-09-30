@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { FaRegEye } from "react-icons/fa";
 
-const InputBox = ({ value, onChange, label, placeholder, type }) => {
+const InputBoxes = ({ value, onChange, label, placeholder, type }) => {
   const [showPassword, setShowPassword] = useState(false);
   const tooglePassword = () => {
     setShowPassword(!showPassword);
@@ -42,4 +42,4 @@ const InputBox = ({ value, onChange, label, placeholder, type }) => {
   );
 };
 
-export default InputBox;
+export default InputBoxes;
