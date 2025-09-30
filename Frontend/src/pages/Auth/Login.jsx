@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { Link, useNavigate } from "react-router-dom";
-import Input from "../../components/Input/InputBox";
+import InputBox from "../../components/Input/InputBox";
 import { validateEmail } from "../../utils/helper"; 
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
@@ -57,7 +57,7 @@ const Login = () => {
         </p>
 
         <form onSubmit={handleLogin}>
-          <Input
+          <InputBox
             value={email}
             onChange={({ target }) => setEmail(target.value)}
             label="Email Address"
@@ -65,7 +65,7 @@ const Login = () => {
             placeholder="Enter your email address"
             required
           />
-          <Input
+          <InputBox
             value={password}
             onChange={({ target }) => setPassword(target.value)}
             label="Password"

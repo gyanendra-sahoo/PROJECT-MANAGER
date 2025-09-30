@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { validateEmail } from "../../utils/helper";
 import ProfilePhotoSelector from "../../components/Input/ProfileSelector";
-import Input from "../../components/Input/InputBox";
+import InputBox from "../../components/Input/InputBox";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
@@ -87,14 +87,14 @@ const SignUp = () => {
           <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Input
+            <InputBox
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               label="Full Name"
               placeholder="Enter your full name"
               type="text"
             />
-            <Input
+            <InputBox
               value={email}
               onChange={({ target }) => setEmail(target.value)}
               label="Email Address"
@@ -102,7 +102,7 @@ const SignUp = () => {
               placeholder="Enter your email address"
               required
             />
-            <Input
+            <InputBox
               value={password}
               onChange={({ target }) => setPassword(target.value)}
               label="Password"
@@ -110,7 +110,7 @@ const SignUp = () => {
               placeholder="Min 6 characters"
               required
             />
-            <Input
+            <InputBox
               value={adminInviteToken}
               onChange={({ target }) => setAdminInviteToken(target.value)}
               label="Admin Invite Token"
